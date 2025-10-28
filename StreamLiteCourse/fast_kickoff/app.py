@@ -4,7 +4,7 @@ import requests # You'll need to install this library: pip install requests
 import streamlit as st
 
 # Replace with your actual Zendesk email and API key
-email = "dani.ria@unity3d.com"
+email = "leonardo.quinones@unity3d.com"
 # It's best practice to store your API token securely, e.g., as an environment variable
 # For this example, we'll use a placeholder, but in a real application, use os.getenv()
 api_token = os.getenv("ZENDESK_API_KEY", "MY_ZENDESK_KEY")
@@ -64,9 +64,10 @@ try:
     if single_ticket_data and 'ticket' in single_ticket_data:
         ticket = single_ticket_data['ticket']
         print(f"  Subject: {ticket['subject']}")
-        print(f"  Status: {ticket['status']}")
-        print(f"  Description: {ticket['description'][:100]}...") # Print first 100 chars
+        st.text(f"  Subject: {ticket['subject']}")
+        st.text(f"  Status: {ticket['status']}")
+        st.text(f"  Description: {ticket['description'][:100]}...") # Print first 100 chars
     else:
-        print("No data found for this ticket or unexpected response format.")
+        st.text("No data found for this ticket or unexpected response format.")
 except requests.exceptions.RequestException as e:
-    print(f"Error getting single ticket: {e}")
+    st.text(f"Error getting single ticket: {e}")
